@@ -21,13 +21,14 @@ export default function MovieDetails() {
   const handleDelete = (id) => {
     setMovieItems((movies) => movies.filter((movie) => movie.id !== id));
   };
+  console.log("state", state);
   return (
     <>
       MovieDetails
       <Card>
         <CardMedia
           component="img"
-          height="140"
+          height="100%"
           image={state?.movieData?.image?.medium}
           alt={state?.movieData?.name}
         />
@@ -38,7 +39,11 @@ export default function MovieDetails() {
               ? `Rating: ${state?.movieData?.rating?.average}`
               : "No rating available"}
           </Typography>
-
+          <Typography variant="body2" color="text.secondary">
+            {state?.movieData?.summary
+              ? state?.movieData?.summary.replace(/(<([^>]+)>)/gi, "")
+              : "No description available"}
+          </Typography>
           <Button
             variant="contained"
             color="primary"

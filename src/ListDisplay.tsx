@@ -6,6 +6,7 @@ import { Chip, Box } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext } from "react";
 import { MovieContext } from "./Context";
+import Avatar from "@mui/material/Avatar";
 
 export default function ListDisplay() {
   const [data, setData] = React.useState("");
@@ -39,12 +40,11 @@ export default function ListDisplay() {
   };
 
   const handleDelete = (movieToDelete) => () => {
-    setSelectedMovies((movies) =>
+    setMovieItems((movies) =>
       movies.filter((movie) => movie.id !== movieToDelete.id)
     );
   };
-  console.log("selectedMovies", selectedMovies);
-  console.log("movieItems", movieItems);
+
   return (
     <div className="App">
       <Autocomplete
@@ -62,11 +62,13 @@ export default function ListDisplay() {
         {movieItems?.map((movie) => (
           <Chip
             key={movie.id}
-            label={movie.name}
+            label={`${movie.name} (Rating: ${
+              movie.rating.average ? movie.rating.average : "NA"
+            })`}
             onDelete={handleDelete(movie)}
             onClick={(e) => movieHandler(e, movie)}
-            component={Link}
-            to={`/movieDetails/${movie.id}`}
+            avatar={<Avatar alt={movie.name} src={movie?.image?.medium} />}
+            variant="outlined"
             clickable
           />
         ))}

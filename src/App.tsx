@@ -20,9 +20,9 @@ export default function App() {
               </ul>
             </nav>
             <Routes>
-              <Route path="/" element={<>DashBored </>} />
+              <Route path="/" element={<>Dashboard </>} />
               <Route path="/listDisplay" element={<ListDisplay />} />
-              <Route path="/movieDetails/:id" element={<MovieDetails />} />
+              <Route path="/movieDetails" element={<MovieDetails />} />
             </Routes>
           </div>
         </Router>
